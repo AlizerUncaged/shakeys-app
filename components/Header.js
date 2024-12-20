@@ -59,6 +59,12 @@ const Header = () => {
                     showsHorizontalScrollIndicator={false}
                     style={styles.navScroll}
                     contentContainerStyle={styles.navContainer}
+                    scrollEventThrottle={16}
+                    directionalLockEnabled={true}
+                    alwaysBounceHorizontal={true}
+                    pagingEnabled={false}
+                    decelerationRate="normal"
+                    snapToAlignment="start"
                >
                     {navItems.map((item, index) => (
                          <NavButton
@@ -129,6 +135,7 @@ const styles = StyleSheet.create({
           flexDirection: 'row',
           alignItems: 'center',
           gap: 4,
+          marginLeft: 10
      },
      dealText: {
           color: '#FFD700',

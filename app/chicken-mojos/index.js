@@ -2,9 +2,11 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import ItemDetailsModal from '../../components/ItemDetailsModal';
+import { useState } from 'react';
 
-const MenuItem = ({ item }) => (
-     <View style={styles.menuItem}>
+const MenuItem = ({ item, onPress }) => (
+     <TouchableOpacity style={styles.menuItem} onPress={onPress}>
           <Image
                source={{ uri: item.image }}
                style={styles.itemImage}
@@ -26,78 +28,81 @@ const MenuItem = ({ item }) => (
                     <Text style={styles.newBadgeText}>NEW</Text>
                </View>
           )}
-     </View>
+     </TouchableOpacity>
 );
 
+
 const ChickenMojosScreen = () => {
-     // Inside ChickenMojosScreen component
+     const [selectedItem, setSelectedItem] = useState(null);
+     const [modalVisible, setModalVisible] = useState(false);
+
      const items = [
           {
                title: "2pc Chicken N Rice",
                description: "Two pieces of our signature chicken with rice and gravy.",
                price: "229.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/2pc-Chicken.png" // Replace with actual image
+               image: "https://d56cx1n31amxi.cloudfront.net/images/2pc-Chicken.png"
           },
           {
                title: "Basket of Mojos",
                description: "A basketful of our deep-fried potato slices with your choice of two dips.",
                price: "439.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/Basket-of-Mojos_l86ql95.png" // Replace with actual image
+               image: "https://d56cx1n31amxi.cloudfront.net/images/Basket-of-Mojos_l86ql95.png" //
           },
           {
                title: "Buddy Pack (5pcs Chix)",
                description: "Juicy, flavor-packed fried chicken with Mojos. *Chicken parts may vary.",
                price: "715.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/Buddy_ykXZx1n.png" // Replace with actual image
+               image: "https://d56cx1n31amxi.cloudfront.net/images/Buddy_ykXZx1n.png" //
           },
           {
                title: "Chicken 'N' Mojos Blowout",
                description: "Juicy, flavor-packed fried chicken with Mojos. *Chicken parts may vary.",
                price: "2,669.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/Blowout_i8qdmRi.png" // Replace with actual image
+               image: "https://d56cx1n31amxi.cloudfront.net/images/Blowout_i8qdmRi.png" //
           },
           {
                title: "Family Pack (7pcs Chix)",
                description: "Juicy, flavor-packed fried chicken with our trademarked Mojos. *Chicken parts may vary.",
                price: "979.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/Family_53lSV7r.png" // Replace with actual image
+               image: "https://d56cx1n31amxi.cloudfront.net/images/Family_53lSV7r.png" //
           },
           {
                title: "Mojos Dip",
                description: "Our deep-fried potato slices with your choice of dip.",
                price: "199.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/Mojos-plate.png" // Replace with actual image
+               image: "https://d56cx1n31amxi.cloudfront.net/images/Mojos-plate.png" //
           },
           {
                title: "Mojos Supreme",
                description: "A bucketful of our deep-fried potato slices with your choice of three dips.",
                price: "589.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/Mojos-Supreme.png" // Replace with actual image
+               image: "https://d56cx1n31amxi.cloudfront.net/images/Mojos-Supreme.png" //
           },
           {
                title: "Party Pack (12pcs Chix)",
                description: "Juicy, flavor-packed fried chicken with Mojos. *Chicken parts may vary.",
                price: "1,629.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/Party_pQBVteY.png" // Replace with actual image
+               image: "https://d56cx1n31amxi.cloudfront.net/images/Party_pQBVteY.png" //
           },
           {
                title: "Solo Pack (3pcs Chix)",
                description: "Juicy, flavor-packed fried chicken with mojos. *Chicken parts may vary.",
                price: "449.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/Solo_KbvmfE4.png" // Replace with actual image
+               image: "https://d56cx1n31amxi.cloudfront.net/images/Solo_KbvmfE4.png" //
           },
           {
                title: "Tender Crrrunch Chicken Fingers Basket",
                description: "Shakey's Tender Crrrunch Chicken Fingers are delicious crispy chicken strips made...",
                price: "409.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/Tender_Crunch-removebg-preview_1_WNvWuHE.png", // Replace with actual image
+               image: "https://d56cx1n31amxi.cloudfront.net/images/Tender_Crunch-removebg-preview_1_WNvWuHE.png", //
                isNew: true
           },
           {
                title: "Tender Crrrunch Chicken Fingers Solo",
                description: "Shakey's Tender Crrrunch Chicken Fingers are delicious crispy chicken strips made...",
                price: "259.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/TCCF-6pcs-PRODUCT_IMAGE_hzCmrqg.png", // Replace with actual image
+               image: "https://d56cx1n31amxi.cloudfront.net/images/TCCF-6pcs-PRODUCT_IMAGE_hzCmrqg.png", //
                isNew: true
           }
      ];
@@ -106,17 +111,37 @@ const ChickenMojosScreen = () => {
           <SafeAreaView style={styles.container}>
                <Header />
                <Text style={styles.screenTitle}>Chicken N Mojos</Text>
-               <ScrollView style={styles.content}>
+               <ScrollView
+                    style={styles.content}
+                    showsVerticalScrollIndicator={false}
+               >
                     <View style={styles.itemsGrid}>
                          {items.map((item, index) => (
-                              <MenuItem key={index} item={item} />
+                              <MenuItem
+                                   key={index}
+                                   item={item}
+                                   onPress={() => {
+                                        setSelectedItem(item);
+                                        setModalVisible(true);
+                                   }}
+                              />
                          ))}
                     </View>
                </ScrollView>
                <Footer />
+
+               <ItemDetailsModal
+                    isVisible={modalVisible}
+                    onClose={() => {
+                         setModalVisible(false);
+                         setSelectedItem(null);
+                    }}
+                    item={selectedItem}
+               />
           </SafeAreaView>
      );
 };
+
 
 const styles = StyleSheet.create({
      container: {

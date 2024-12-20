@@ -2,9 +2,11 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { useState } from 'react';
+import ItemDetailsModal from '../../components/ItemDetailsModal';
 
-const DealItem = ({ item }) => (
-     <View style={styles.dealItem}>
+const DealItem = ({ item, onPress }) => (
+     <TouchableOpacity style={styles.dealItem} onPress={onPress}>
           <View style={styles.dealImageContainer}>
                <Image
                     source={{ uri: item.image }}
@@ -21,10 +23,13 @@ const DealItem = ({ item }) => (
           <TouchableOpacity style={styles.orderButton}>
                <Text style={styles.orderButtonText}>Order</Text>
           </TouchableOpacity>
-     </View>
+     </TouchableOpacity>
 );
 
 const LateNightDealsScreen = () => {
+     const [selectedItem, setSelectedItem] = useState(null);
+     const [modalVisible, setModalVisible] = useState(false);
+
      const deals = [
           {
                title: "Hawaiian Delight - Thin Crust - Large - 40% OFF",
@@ -62,16 +67,34 @@ const LateNightDealsScreen = () => {
           <SafeAreaView style={styles.container}>
                <Header />
                <Text style={styles.screenTitle}>Late Night Deals</Text>
-               <ScrollView style={styles.content}>
+               <ScrollView
+                    style={styles.content}
+                    showsVerticalScrollIndicator={false}
+               >
                     {deals.map((deal, index) => (
-                         <DealItem key={index} item={deal} />
+                         <DealItem
+                              key={index}
+                              item={deal}
+                              onPress={() => {
+                                   setSelectedItem(deal);
+                                   setModalVisible(true);
+                              }}
+                         />
                     ))}
                </ScrollView>
                <Footer />
+
+               <ItemDetailsModal
+                    isVisible={modalVisible}
+                    onClose={() => {
+                         setModalVisible(false);
+                         setSelectedItem(null);
+                    }}
+                    item={selectedItem}
+               />
           </SafeAreaView>
      );
 };
-
 const styles = StyleSheet.create({
      container: {
           flex: 1,
