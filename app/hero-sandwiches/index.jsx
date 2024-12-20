@@ -40,13 +40,13 @@ const HeroSandwichesScreen = () => {
                title: "Classic Hero",
                description: "A hearty classic Hero Sandwich-filled with layers of Ham, Salami, Pepperoni,...",
                price: "139.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/Classic-Hero_2023.png"
+               image: "https://d56cx1n31amxi.cloudfront.net/images/CLASSIC_HERO-Product_Image500x500_HXhXJmv.png"
           },
           {
                title: "Hero Burger",
                description: "Made with juicy, quarter pound angus beef patty, lettuce, tomato and white...",
                price: "199.00",
-               image: "https://d56cx1n31amxi.cloudfront.net/images/Hero-Burger_2023.png"
+               image: "https://d56cx1n31amxi.cloudfront.net/images/HERO_BURGER_800_x_800px.png"
           },
           {
                title: "Super Hero Burger",
