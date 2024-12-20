@@ -25,7 +25,6 @@ const NavButton = ({ title, iconPath, onPress, extraContent }) => (
 const Header = () => {
      const router = useRouter();
 
-
      const navItems = [
           {
                title: "Home",
@@ -33,57 +32,19 @@ const Header = () => {
                route: '/'
           },
           {
-               title: "Promos",
-               icon: "https://d56cx1n31amxi.cloudfront.net/images/Promos_YJEXxHL.png",
-               route: '/promos'
-          },
-          {
-               title: "Pizza",
-               icon: "https://d56cx1n31amxi.cloudfront.net/images/Pepp_Y24DeIA.png",
-               route: '/pizza'
+               title: "Late Night Deals",
+               icon: "https://d56cx1n31amxi.cloudfront.net/images/PROJ-BATMAN-WEB_ICON-800x800-2.png",
+               route: '/late-night-deals',
+               extraContent: (
+                    <Text style={styles.dealText}>40% OFF</Text>
+               )
           },
           {
                title: "Chicken N Mojos",
                icon: "https://d56cx1n31amxi.cloudfront.net/images/Solo-pack_dF2anVL.png",
                route: '/chicken-mojos'
-          },
-          {
-               title: "Hero Sandwiches",
-               icon: "https://d56cx1n31amxi.cloudfront.net/images/CLASSIC_HERO-Product_Image500x500_VghGdDO.png",
-               route: '/hero-sandwiches'
-          },
-          {
-               title: "Group Meals",
-               icon: "https://d56cx1n31amxi.cloudfront.net/images/MMD_yMF636T.png",
-               route: '/group-meals'
-          },
-          {
-               title: "Combos",
-               icon: "https://d56cx1n31amxi.cloudfront.net/images/BOL_AUIs365.png",
-               route: '/combos'
-          },
-          {
-               title: "Pasta",
-               icon: "https://d56cx1n31amxi.cloudfront.net/images/Skiletti_rn3kB9l.png",
-               route: '/pasta'
-          },
-          {
-               title: "Starters",
-               icon: "https://d56cx1n31amxi.cloudfront.net/images/Captains-choice_hBPUUdO.png",
-               route: '/starters'
-          },
-          {
-               title: "Soup & Salad",
-               icon: "https://d56cx1n31amxi.cloudfront.net/images/Tuna-Ceasar_aJ8HLQs.png",
-               route: '/soup-salad'
-          },
-          {
-               title: "Drinks",
-               icon: "https://d56cx1n31amxi.cloudfront.net/images/drinks-image.png",
-               route: '/drinks'
           }
      ];
-
      return (
           <View style={styles.headerContainer}>
                <View style={styles.header}>
